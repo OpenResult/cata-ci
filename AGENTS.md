@@ -6,6 +6,7 @@
 - `labs/` contains participant lab instructions.
 - `exercises/step-0N/` contains starter code for each workshop step.
 - `solutions/step-0N/` contains the clean reference implementation for the same step.
+- `step-00` is optional pre-work and uses a small library crate instead of a CLI binary.
 - The root `Cargo.toml` defines the workspace and shared dependency versions.
 
 ## Build And Test Commands
@@ -23,6 +24,7 @@ To run a specific step:
 ```bash
 cargo run -p kata-ci-exercise-step-03 -- build all
 cargo run -p kata-ci-solution-step-05 -- --describe verify
+cargo test -p kata-ci-exercise-step-00
 ```
 
 ## Teaching Material Conventions
@@ -47,6 +49,7 @@ cargo run -p kata-ci-solution-step-05 -- --describe verify
 ## Architecture Rules
 
 - Prefer clarity over abstraction.
+- Keep `step-00` focused on Rust fundamentals, not the CLI architecture story.
 - Keep `clap` parsing types at the edge when a typed internal model exists.
 - Keep fake execution deterministic and local. No real shelling out.
 - Avoid async, macros beyond mainstream derive usage, and unnecessary generics.

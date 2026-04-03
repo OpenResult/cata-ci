@@ -2,6 +2,9 @@
 
 `kata-ci` is a half-day Rust workshop for developers who already know how to design software, but are still getting comfortable with Rust.
 
+The main workshop starts at step `01`.
+Step `00` is optional pre-work for participants who want a focused Rust fundamentals warm-up before the CLI material begins.
+
 The workshop teaches a specific CLI architecture progression:
 
 - parse arguments with `clap`
@@ -18,8 +21,11 @@ The domain is deliberately fake. `kata-ci` feels inspired by CI/CD tooling, but 
 - Developers who are strong in general engineering
 - Teams adopting Rust for internal tools or platform tooling
 - Learners who want a practical example of separation of concerns in a CLI
+- Learners who may want an ownership-and-`Result` refresher before the main workshop
 
 ## What Participants Learn
+
+Main workshop:
 
 - How to model a small but maintainable Rust CLI
 - When to keep `clap` types at the edge of the system
@@ -28,9 +34,20 @@ The domain is deliberately fake. `kata-ci` feels inspired by CI/CD tooling, but 
 - How dry-run and describe modes shape architecture
 - How to write deterministic tests without real shell commands
 
+Optional pre-work in step `00` also covers:
+
+- `String` vs `&str`
+- pass by value vs pass by reference
+- mutable borrowing with `&mut`
+- `Result`, `unwrap`, and `?`
+
 ## Agenda
 
-Approximate pacing for a half-day workshop:
+Recommended pre-work:
+
+- 60-90 min: step 00, Rust basics, self-paced and optional
+
+Approximate pacing for the live half-day workshop:
 
 - 15 min: intro and repo orientation
 - 25 min: step 1, CLI basics
@@ -63,11 +80,18 @@ exercises/   starter code for each step
 solutions/   reference solution for each step
 ```
 
-Each step is a separate binary crate so it can compile and run independently.
+Each step is a separate crate so it can compile and run independently.
+Step `00` is a library crate.
+Steps `01 -> 05` are binary crates.
 
 ## Workshop Flow
 
-Use the materials in order:
+Optional pre-work:
+
+1. `slides/00-rust-basics.md`
+2. `labs/00-rust-basics.md`
+
+Main workshop flow:
 
 1. `slides/01-cli-basics.md`
 2. `labs/01-cli-basics.md`
@@ -83,6 +107,12 @@ Use the materials in order:
 ## Running Exercises
 
 All commands below are run from the repository root.
+
+Step 00, optional pre-work:
+
+```bash
+cargo test -p kata-ci-exercise-step-00
+```
 
 Step 1:
 
@@ -122,6 +152,14 @@ cargo test -p kata-ci-exercise-step-05
 
 ## Running Solutions
 
+All commands below are run from the repository root.
+
+Step 00, optional pre-work:
+
+```bash
+cargo test -p kata-ci-solution-step-00
+```
+
 Step 1:
 
 ```bash
@@ -160,6 +198,7 @@ cargo test -p kata-ci-solution-step-05
 
 ## Recommended Facilitator Pacing
 
+- Assign step `00` ahead of time when the audience is new enough to Rust that ownership and error handling would otherwise slow down the live session.
 - Keep the lectures short and code-focused.
 - Demo the solution crate only after participants have worked the exercise.
 - Prefer discussing tradeoffs over Rust trivia.
@@ -178,4 +217,5 @@ This workshop is intentionally about one narrow architectural story:
 - `Runner` owns execution strategy
 - `Describer` owns rendering
 
-If you run the steps in order, participants will see the same fake CLI evolve from a simple parser into a small, testable application.
+Optional step `00` prepares the Rust language basics.
+If you run `01 -> 05` in order, participants will see the same fake CLI evolve from a simple parser into a small, testable application.

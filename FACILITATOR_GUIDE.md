@@ -2,6 +2,7 @@
 
 ## Suggested Timebox
 
+- Optional pre-work, step 00: 60-90 min async
 - Intro and repo orientation: 15 min
 - Step 1, CLI basics: 25 min
 - Step 2, typed command model: 25 min
@@ -14,6 +15,7 @@
 
 The workshop should keep returning to one idea: each architectural layer exists to make the next change easier.
 
+- Step 00 is optional pre-work for ownership, borrowing, and `Result`.
 - Step 1 shows how quickly a CLI can become crowded.
 - Step 2 introduces a typed internal command boundary.
 - Step 3 introduces planning as a separate concern.
@@ -21,6 +23,19 @@ The workshop should keep returning to one idea: each architectural layer exists 
 - Step 5 shows that rendering and testing become easier once the design is decomposed.
 
 ## Likely Stumbling Points
+
+### Step 00
+
+- `String` versus `&str`
+- shared borrow versus mutable borrow
+- understanding why `unwrap` is easy but not robust
+- reading function signatures as ownership contracts
+
+Recovery:
+
+- keep the examples concrete and small
+- explain ownership in terms of “who is responsible for this value now?”
+- keep reminding participants that the goal is readiness for the CLI workshop, not total Rust fluency
 
 ### Step 1
 
@@ -77,6 +92,10 @@ Recovery:
 
 ## Talking Points
 
+- `String` owns data, `&str` borrows data.
+- `&T` reads, `&mut T` updates in place.
+- `unwrap` is fine for experiments, but poor default behavior for expected input errors.
+- `?` is one of Rust's most useful tools for readable error handling.
 - `clap` is a parser, not your domain model.
 - A `Command` expresses intent better than raw parser structs.
 - A `Plan` gives you a stable object to inspect, render, test, and execute.
@@ -85,6 +104,7 @@ Recovery:
 
 ## Expected Solutions
 
+- Step 00: a small library crate that demonstrates ownership, borrowing, mutation through `&mut`, and `Result` propagation
 - Step 1: a working `clap` CLI with nested subcommands and readable output
 - Step 2: a typed `Command` enum and mapping layer
 - Step 3: a planner that returns metadata and deterministic steps
@@ -92,6 +112,14 @@ Recovery:
 - Step 5: describe output in text and JSON, minimal config defaults, and integration tests
 
 ## Demo Suggestions
+
+Step 00, optional pre-work:
+
+```bash
+cargo test -p kata-ci-solution-step-00
+```
+
+Use this only if you want to preview the pre-work or rescue a group that clearly needs a quick ownership refresher.
 
 Step 1:
 
@@ -135,4 +163,5 @@ cargo run -p kata-ci-solution-step-05 -- --config solutions/step-05/kata-ci.toml
 - move them to the next locally stable milestone, not the complete solution
 - show a smaller match expression or one enum variant instead of the whole file
 - prefer asking “what should this layer own?” over correcting syntax immediately
+- if the real blocker is ownership or `Result`, redirect them to `step-00` instead of reteaching all of Rust inside the CLI labs
 - if needed, let them jump to the matching `solutions/step-0N/` directory and work backward
