@@ -1,10 +1,12 @@
 [workspace]
 members = [
+    "exercises/step-00",
     "exercises/step-01",
     "exercises/step-02",
     "exercises/step-03",
     "exercises/step-04",
     "exercises/step-05",
+    "solutions/step-00",
     "solutions/step-01",
     "solutions/step-02",
     "solutions/step-03",
